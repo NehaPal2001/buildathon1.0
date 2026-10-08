@@ -1,0 +1,6 @@
+{
+  "name": "recon",
+  "version": "0.1.0",
+  "description": "Feature intelligence for automation testers: reads the branch, enumerates testable states, finds what the ticket never mentioned, scopes the regression suite, and generates Playwright specs in the repo's own conventions.",
+  "keywords": ["playwright", "testing", "qa", "sdet", "regression"]
+}

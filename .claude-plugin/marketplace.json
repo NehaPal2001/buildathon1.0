@@ -1,0 +1,14 @@
+{
+  "name": "recon-marketplace",
+  "owner": { "name": "recon" },
+  "metadata": { "description": "Recon — feature intelligence for automation testers", "version": "0.1.0" },
+  "plugins": [
+    {
+      "name": "recon",
+      "source": "./",
+      "description": "Reads the code a tester can't read and writes the Playwright tests for the states nobody mentioned.",
+      "version": "0.1.0",
+      "category": "testing"
+    }
+  ]
+}
