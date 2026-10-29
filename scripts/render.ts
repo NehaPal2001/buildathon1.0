@@ -98,8 +98,16 @@ export function renderBrief(a: Analysis): { terminal: string; markdown: string }
   }
 
   if (!a.scope) {
+    // An absent `scope` means this milestone did not produce coverage or scope — it does NOT
+    // mean no suite was found. Those are different facts, and nothing in `Analysis` records
+    // which suite directory was located, so this branch must not guess at one: claiming "no
+    // Playwright suite was found" is false on every repo that has one (the booking fixture
+    // resolves 43 tests and still landed here). render-html.ts:284 already words it this way;
+    // keep the two renderers saying the same thing. The second line is the companion warning:
+    // with coverage uncomputed, every COVERED cell above is a default, not a finding.
     d.heading('REGRESSION SCOPE — not computed');
-    d.line('· no Playwright suite was found (checked e2e/, tests/, playwright/, test/ — pass --suite <dir> to point at one)');
+    d.line('· coverage matching and regression scope are not produced by this milestone');
+    d.line('· every state above reads "covered: no" regardless of what the suite actually covers — do not read that column as a coverage result');
   } else {
     const s = a.scope;
     d.heading(`REGRESSION SCOPE — ${s.totalTests} tests in ${s.inScope.length + s.outOfScope.length} spec files`);

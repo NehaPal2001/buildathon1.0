@@ -78,7 +78,7 @@ with access to the Git repo can install from it.
 **In Claude Code**, from the terminal:
 
 ```
-/plugin marketplace add NehaPal2001/1.0
+/plugin marketplace add NehaPal2001/buildathon1.0
 /plugin install recon@recon-marketplace
 ```
 

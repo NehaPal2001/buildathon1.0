@@ -46,6 +46,17 @@ describe('renderBrief', () => {
     expect(markdown).toContain('| e2e/specs/search.spec.ts | out | only visits /search |');
   });
 
+  it('says scope was not computed, without claiming no suite was found', () => {
+    const { terminal, markdown } = renderBrief(a);
+    // An absent `scope` means this milestone produced no coverage or scope, not that the repo
+    // has no suite — `Analysis` carries no suite directory to justify that claim. Mirrors
+    // render-html.test.ts so both renderers are held to the same wording.
+    expect(terminal).not.toMatch(/no Playwright suite was found/i);
+    expect(markdown).not.toMatch(/no Playwright suite was found/i);
+    expect(terminal).toContain('not produced by this milestone');
+    expect(terminal).toContain('do not read that column as a coverage result');
+  });
+
   it('reports suppressed and unrecognised exclusions', () => {
     const { terminal } = renderBrief({ ...a, suppressed: 2, exclusions: { recognised: ['ignore states from src/legacy/**'], unrecognised: ['skip flaky'] } });
     expect(terminal).toContain('2 states suppressed');
